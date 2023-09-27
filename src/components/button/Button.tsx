@@ -9,7 +9,7 @@ type ButtonPropsType = {
 }
 
 export const Button: React.FC<ButtonPropsType> = (props) => {
-  let {title, disabledButton, onClick} = props
+  const {title, disabledButton, onClick} = props
   return (
     <button
       onClick={onClick} disabled={disabledButton}

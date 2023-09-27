@@ -14,7 +14,7 @@ type CountButtonsPropsType = {
 }
 
 export const CountButtons: React.FC<CountButtonsPropsType> = (props) => {
-  let {count, maxValue, minValue, setCount, error, setEditModeSetCount} = props
+  const {count, maxValue, minValue, setCount, error, setEditModeSetCount} = props
 
   const onClickIncrease = () => {
     setCount((prevCount: number) => prevCount + 1);
@@ -27,7 +27,6 @@ export const CountButtons: React.FC<CountButtonsPropsType> = (props) => {
   const onSetCallback = () => {
     setEditModeSetCount(true)
   }
-  console.log(count <= maxValue)
   return (
     <div className={'count-button'}>
       <Button title={'inc'} onClick={onClickIncrease} disabledButton={count >= maxValue || error}/>

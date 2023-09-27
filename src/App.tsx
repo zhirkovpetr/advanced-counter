@@ -6,35 +6,35 @@ import {SetCount} from "./components/set-count/SetCount";
 import './App.css';
 
 export const App: React.FC = () => {
-  let [minValue, setMinValue] = useState<number>(0)
-  let [maxValue, setMaxValue] = useState<number>(5)
-  let [count, setCount] = useState<number>(0)
-  let [error, setError] = useState<boolean>(false)
-  let [editModeSetCount, setEditModeSetCount] = useState<boolean>(false)
+  const [minValue, setMinValue] = useState<number>(0)
+  const [maxValue, setMaxValue] = useState<number>(5)
+  const [count, setCount] = useState<number>(0)
+  const [error, setError] = useState<boolean>(false)
+  const [editModeSetCount, setEditModeSetCount] = useState<boolean>(false)
 
   useEffect(() => {
-    let minValue = localStorage.getItem("minValue")
+    const minValue = localStorage.getItem("minValue")
+    const maxValue = localStorage.getItem("maxValue")
+    const count = localStorage.getItem("count")
+
     if (minValue) {
-      let minValueLS = JSON.parse(minValue)
-      setMinValue(minValueLS)
+      setMinValue(JSON.parse(minValue))
     }
-  }, [])
-
-  useEffect(() => {
-    let maxValue = localStorage.getItem("maxValue")
     if (maxValue) {
-      let maxValueLS = JSON.parse(maxValue)
-      setMaxValue(maxValueLS)
+      setMaxValue(JSON.parse(maxValue))
+    }
+    if (count) {
+      setCount(JSON.parse(count))
     }
   }, [])
 
   useEffect(() => {
-    let count = localStorage.getItem("count")
-    if (count) {
-      let countLS = JSON.parse(count)
-      setCount(countLS)
-    }
-  }, [])
+    localStorage.setItem('minValue', JSON.stringify(minValue))
+  }, [minValue])
+
+  useEffect(() => {
+    localStorage.setItem('maxValue', JSON.stringify(maxValue))
+  }, [maxValue])
 
   useEffect(() => {
     localStorage.setItem('count', JSON.stringify(count))

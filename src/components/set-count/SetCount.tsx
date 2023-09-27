@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 
 import {Button} from "../button/Button";
 import {InputsBlock} from "../inputs-block/InputsBlock";
@@ -17,7 +17,7 @@ type SetCountPropsType = {
 }
 
 export const SetCount: React.FC<SetCountPropsType> = (props) => {
-  let {minValue, maxValue, setMinValue, setMaxValue, setCount,error, setError, setEditModeSetCount} = props
+  const {minValue, maxValue, setMinValue, setMaxValue, setCount,error, setError, setEditModeSetCount} = props
 
   const onSetValue = () => {
     setEditModeSetCount(false)
@@ -25,28 +25,6 @@ export const SetCount: React.FC<SetCountPropsType> = (props) => {
     setMaxValue(maxValue)
     setCount(minValue)
   }
-
-  useEffect(() => {
-    let minValue = localStorage.getItem("minValue")
-    if (minValue) {
-      let minValueLS = JSON.parse(minValue)
-      setMinValue(minValueLS)
-    }
-  }, [])
-
-  useEffect(() => {
-    let maxValue = localStorage.getItem("maxValue")
-    if (maxValue) {
-      let maxValueLS = JSON.parse(maxValue)
-      setMaxValue(maxValueLS)
-    }
-  }, [])
-
-
-  useEffect(() => {
-    localStorage.setItem('maxValue', JSON.stringify(maxValue))
-    localStorage.setItem('minValue', JSON.stringify(minValue))
-  }, [minValue, maxValue])
 
   return (
     <div className={'set-count-block'}>

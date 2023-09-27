@@ -11,7 +11,7 @@ type InputPropsType = {
 }
 
 export const Input:React.FC<InputPropsType> = (props) => {
-  let {error, setValue, className, title, value} =props
+  const {error, setValue, className, title, value} =props
 
     const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
       setValue(Number(e.currentTarget.value))
