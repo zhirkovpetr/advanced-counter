@@ -1,1 +1,1 @@
-# advanced-counter
+https://zhirkovpetr.github.io/advanced-counter
