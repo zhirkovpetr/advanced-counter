@@ -27,12 +27,12 @@ export const CountButtons: React.FC<CountButtonsPropsType> = (props) => {
   const onSetCallback = () => {
     setEditModeSetCount(true)
   }
-
+  console.log(count <= maxValue)
   return (
     <div className={'count-button'}>
-      <Button title={'inc'} onClick={onClickIncrease} disabledButton={count === maxValue || error}/>
-      <Button title={'reset'} onClick={onClickReset} disabledButton={count !== maxValue || error}/>
-      <Button title={'set'} onClick={onSetCallback}/>
+      <Button title={'inc'} onClick={onClickIncrease} disabledButton={count >= maxValue || error}/>
+      <Button title={'reset'} onClick={onClickReset} disabledButton={count === minValue || error}/>
+      <Button title={'set'} onClick={onSetCallback} disabledButton={error}/>
     </div>
   )
 }

@@ -4,7 +4,7 @@ import './Button.css';
 
 type ButtonPropsType = {
   title: string
-  disabledButton?: boolean
+  disabledButton: boolean
   onClick: () => void
 }
 

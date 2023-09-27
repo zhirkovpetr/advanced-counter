@@ -13,6 +13,22 @@ export const App: React.FC = () => {
   let [editModeSetCount, setEditModeSetCount] = useState<boolean>(false)
 
   useEffect(() => {
+    let minValue = localStorage.getItem("minValue")
+    if (minValue) {
+      let minValueLS = JSON.parse(minValue)
+      setMinValue(minValueLS)
+    }
+  }, [])
+
+  useEffect(() => {
+    let maxValue = localStorage.getItem("maxValue")
+    if (maxValue) {
+      let maxValueLS = JSON.parse(maxValue)
+      setMaxValue(maxValueLS)
+    }
+  }, [])
+
+  useEffect(() => {
     let count = localStorage.getItem("count")
     if (count) {
       let countLS = JSON.parse(count)
