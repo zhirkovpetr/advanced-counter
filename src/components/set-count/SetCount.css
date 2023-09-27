@@ -1,0 +1,20 @@
+button,
+button:active,
+button:focus  {
+  border:none;
+}
+
+.set-count-block {
+  width: 25%;
+  border: 2px solid #22f3d0;
+  border-radius: 8px;
+  height: 28%
+}
+
+.set-count-button{
+  color: #22f3d0;
+  border: 2px solid #22f3d0;
+  border-radius: 8px;
+  width: 90%;
+  margin: 10px auto;
+}

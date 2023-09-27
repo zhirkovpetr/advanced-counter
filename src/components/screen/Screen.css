@@ -1,0 +1,25 @@
+.count-screen {
+  color: #22f3d0;
+  border: 2px solid #22f3d0;
+  border-radius: 8px;
+  width: 90%;
+  margin: 10px auto;
+}
+
+.count-screen span {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.value {
+  margin-bottom: 5px;
+  height: 40px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.value .active {
+  color: red;
+}

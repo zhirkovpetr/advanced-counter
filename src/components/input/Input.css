@@ -1,0 +1,33 @@
+.max-value {
+  margin-top: 5px;
+  height: 55px;
+}
+
+.start-value {
+  height: 55px;
+  margin-bottom: 5px;
+}
+
+.input-error{
+  border: 2px solid red;
+  border-radius: 4px;
+  width: 25%;
+  margin: 5px 0 5px 0;
+}
+
+.input-error:focus {
+  border: 3px solid red;
+  outline: none;
+}
+
+.set-count-screen .start-value-input {
+  border: 2px solid #22f3d0;
+  border-radius: 4px;
+  width: 25%;
+  margin: 5px 0 5px 0;
+}
+
+.set-count-screen .start-value-input:focus {
+  border: 3px solid #00ffd1;
+  outline: none;
+}
