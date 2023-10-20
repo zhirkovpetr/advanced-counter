@@ -1,15 +1,11 @@
 import React from "react";
 
+import {useAppSelector} from "../../hooks/ReduxHooks";
+
 import './Screen.css';
 
-type ScreenPropsType = {
-  error: boolean
-  count: number
-  maxValue: number
-}
-
-export const Screen: React.FC<ScreenPropsType> = (props) => {
-  const {error, maxValue, count} = props
+export const Screen: React.FC = () => {
+  const {count, maxValue, error} = useAppSelector(state => state.countSlice.counter)
   return (
     <div className={'count-screen'}>
       <div className={'value'}>

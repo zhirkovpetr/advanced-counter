@@ -1,67 +1,41 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 
 import {Count} from "./components/count/Count";
 import {SetCount} from "./components/set-count/SetCount";
+import {useAppDispatch, useAppSelector} from "./hooks/ReduxHooks";
+import {setCount, setEditMode, setStateLS} from "./redux/count-slice";
 
 import './App.css';
 
 export const App: React.FC = () => {
-  const [minValue, setMinValue] = useState<number>(0)
-  const [maxValue, setMaxValue] = useState<number>(5)
-  const [count, setCount] = useState<number>(0)
-  const [error, setError] = useState<boolean>(false)
-  const [editModeSetCount, setEditModeSetCount] = useState<boolean>(false)
+  const {counter} = useAppSelector(state => state.countSlice)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    const minValue = localStorage.getItem("minValue")
-    const maxValue = localStorage.getItem("maxValue")
-    const count = localStorage.getItem("count")
+    const saveCounter = JSON.parse(localStorage.getItem("counter") as string)
+    dispatch(setStateLS(saveCounter ? saveCounter : counter))
+  }, [dispatch])
 
-    if (minValue) {
-      setMinValue(JSON.parse(minValue))
-    }
-    if (maxValue) {
-      setMaxValue(JSON.parse(maxValue))
-    }
-    if (count) {
-      setCount(JSON.parse(count))
-    }
-  }, [])
+  const updateCount = (count: number) => {
+    dispatch(setCount({count}))
+  }
 
-  useEffect(() => {
-    localStorage.setItem('minValue', JSON.stringify(minValue))
-  }, [minValue])
-
-  useEffect(() => {
-    localStorage.setItem('maxValue', JSON.stringify(maxValue))
-  }, [maxValue])
-
-  useEffect(() => {
-    localStorage.setItem('count', JSON.stringify(count))
-  }, [count])
+  const updateEditModeSetCount = (editMode: boolean) => {
+    dispatch(setEditMode({editMode}))
+  }
 
   return (
     <div className="App">
       {
-        editModeSetCount ?
+        counter.editMode ?
           <SetCount
-            minValue={minValue}
-            maxValue={maxValue}
-            setMinValue={setMinValue}
-            setMaxValue={setMaxValue}
-            setCount={setCount}
-            error={error}
-            setEditModeSetCount={setEditModeSetCount}
-            setError={setError}
+            setCount={updateCount}
+            setEditModeSetCount={updateEditModeSetCount}
           />
           :
           <Count
-            minValue={minValue}
-            maxValue={maxValue}
-            count={count}
-            setCount={setCount}
-            setEditModeSetCount={setEditModeSetCount}
-            error={error}
+            setCount={updateCount}
+            setEditModeSetCount={updateEditModeSetCount}
           />
       }
     </div>
