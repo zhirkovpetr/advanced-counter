@@ -14,7 +14,7 @@ type SetCountPropsType = {
 
 export const SetCount: React.FC<SetCountPropsType> = (props) => {
   const {setCount, setEditModeSetCount} = props
-  const {minValue, maxValue, error,} = useAppSelector(state => state.countSlice.counter)
+  const {minValue, maxValue, error} = useAppSelector(state => state.countSlice.counter)
   const dispatch = useAppDispatch()
 
   const updateMinValue = (minValue: number) => {
@@ -30,6 +30,7 @@ export const SetCount: React.FC<SetCountPropsType> = (props) => {
     updateMinValue(minValue)
     updateMaxValue(maxValue)
     setCount(minValue)
+    localStorage.setItem('counter', JSON.stringify({ minValue, maxValue, count: minValue, error, editMode: false }))
   }
 
   return (

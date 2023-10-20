@@ -12,18 +12,21 @@ type CountButtonsPropsType = {
 
 export const CountButtons: React.FC<CountButtonsPropsType> = (props) => {
   const {setCount, setEditModeSetCount} = props
-  const {count, maxValue, minValue, error} = useAppSelector(state => state.countSlice.counter)
+  const {count, maxValue, minValue, error, editMode} = useAppSelector(state => state.countSlice.counter)
 
   const onClickIncrease = () => {
     setCount(count + 1);
+    localStorage.setItem('counter', JSON.stringify({minValue, maxValue, count: count+1, error, editMode}))
   }
 
   const onClickReset = () => {
     setCount(minValue)
+    localStorage.setItem('counter', JSON.stringify({minValue, maxValue, count: minValue, error, editMode}))
   }
 
   const onSetCallback = () => {
     setEditModeSetCount(true)
+    localStorage.setItem('counter', JSON.stringify({minValue, maxValue, count: minValue, error, editMode: true}))
   }
   return (
     <div className={'count-button'}>

@@ -1,45 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {Count} from "./components/count/Count";
 import {SetCount} from "./components/set-count/SetCount";
+import {useAppDispatch, useAppSelector} from "./hooks/ReduxHooks";
+import {setCount, setEditMode, setStateLS} from "./redux/count-slice";
 
 import './App.css';
-import {useAppDispatch, useAppSelector} from "./hooks/ReduxHooks";
-import {setCount, setEditMode} from "./redux/count-slice";
 
 export const App: React.FC = () => {
   const {counter} = useAppSelector(state => state.countSlice)
   const dispatch = useAppDispatch()
 
-/*  useEffect(() => {
-    const minValue = localStorage.getItem("minValue")
-    const maxValue = localStorage.getItem("maxValue")
-    const count = localStorage.getItem("count")
-
-    if (minValue) {
-      setMinValue(JSON.parse(minValue))
-    }
-    if (maxValue) {
-      setMaxValue(JSON.parse(maxValue))
-    }
-    if (count) {
-      setCount(JSON.parse(count))
-    }
-  }, [])*/
-
-/*  useEffect(() => {
-    localStorage.setItem('minValue', JSON.stringify(minValue))
-  }, [minValue])
-
   useEffect(() => {
-    localStorage.setItem('maxValue', JSON.stringify(maxValue))
-  }, [maxValue])
-
-  useEffect(() => {
-    localStorage.setItem('count', JSON.stringify(count))
-  }, [count])*/
-
-
+    const saveCounter = JSON.parse(localStorage.getItem("counter") as string)
+    dispatch(setStateLS(saveCounter ? saveCounter : counter))
+  }, [dispatch])
 
   const updateCount = (count: number) => {
     dispatch(setCount({count}))
