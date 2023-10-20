@@ -2,35 +2,40 @@ import React from "react";
 
 import {Button} from "../button/Button";
 import {InputsBlock} from "../inputs-block/InputsBlock";
+import {setMaxValue, setMinValue} from "../../redux/count-slice";
+import {useAppDispatch, useAppSelector} from "../../hooks/ReduxHooks";
 
 import './SetCount.css';
 
 type SetCountPropsType = {
-  minValue: number
-  maxValue: number
-  setMinValue: (minValue: number) => void
-  setMaxValue: (maxValue: number) => void
   setCount: (count: number) => void
-  setError: (error: boolean) => void
   setEditModeSetCount: (editModeSetCount: boolean) => void
-  error: boolean
 }
 
 export const SetCount: React.FC<SetCountPropsType> = (props) => {
-  const {minValue, maxValue, setMinValue, setMaxValue, setCount,error, setError, setEditModeSetCount} = props
+  const {setCount, setEditModeSetCount} = props
+  const {minValue, maxValue, error,} = useAppSelector(state => state.countSlice.counter)
+  const dispatch = useAppDispatch()
+
+  const updateMinValue = (minValue: number) => {
+    dispatch(setMinValue({minValue}))
+  }
+
+  const updateMaxValue = (maxValue: number) => {
+    dispatch(setMaxValue({maxValue}))
+  }
 
   const onSetValue = () => {
     setEditModeSetCount(false)
-    setMinValue(minValue)
-    setMaxValue(maxValue)
+    updateMinValue(minValue)
+    updateMaxValue(maxValue)
     setCount(minValue)
   }
 
   return (
     <div className={'set-count-block'}>
-      <InputsBlock
-        minValue={minValue} maxValue={maxValue} setError={setError} setMinValue={setMinValue} setMaxValue={setMaxValue}
-        error={error}/>
+      <InputsBlock setMinValue={updateMinValue} setMaxValue={updateMaxValue}
+        minValue={minValue} maxValue={maxValue} error={error}/>
       <div className={'set-count-button'}>
         <Button
           title={'set'} onClick={onSetValue}

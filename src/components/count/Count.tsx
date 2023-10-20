@@ -6,21 +6,17 @@ import {CountButtons} from "../count-buttons/CountButtons";
 import './Count.css';
 
 type CountPropsType = {
-  maxValue: number
-  minValue: number
-  count: number
-  setCount: React.Dispatch<React.SetStateAction<number>>
-  error: boolean
-  setEditModeSetCount: (editModeSetCount: boolean) => void
+  setCount: (count: number) => void
+  setEditModeSetCount: (editMode: boolean) => void
 }
 
 export const Count: React.FC<CountPropsType> = (props) => {
-  const {count, maxValue, minValue, setCount, error, setEditModeSetCount} = props
+  const {setCount, setEditModeSetCount} = props
 
   return (
     <div className={'count-block'}>
-      <Screen count={count} maxValue={maxValue} error={error}/>
-      <CountButtons count={count} setCount={setCount} setEditModeSetCount={setEditModeSetCount}  maxValue={maxValue} minValue={minValue} error={error}/>
+      <Screen />
+      <CountButtons setCount={setCount} setEditModeSetCount={setEditModeSetCount} />
     </div>
   )
 }

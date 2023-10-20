@@ -1,6 +1,8 @@
 import React, {useEffect} from "react";
 
 import {Input} from "../input/Input";
+import {useAppDispatch} from "../../hooks/ReduxHooks";
+import {setError} from "../../redux/count-slice";
 
 import './InputsBlock.css';
 
@@ -10,18 +12,22 @@ type InputsBlockPropsType = {
   minValue: number
   setMinValue: (minValue: number) => void
   setMaxValue: (maxValue: number) => void
-  setError: (error: boolean) => void
 }
 
 export const InputsBlock:React.FC<InputsBlockPropsType> = (props) => {
-  const {error, maxValue, minValue, setMaxValue, setMinValue, setError} =props
+  const {error, maxValue, minValue, setMinValue, setMaxValue} =props
+  const dispatch = useAppDispatch()
+
+  const updateError = (error: boolean) => {
+    dispatch(setError({error}))
+  }
 
   useEffect(() => {
     if (minValue >= maxValue || minValue < 0 || maxValue < 0) {
-      setError(true)
+      updateError(true)
 
     } else {
-      setError(false)
+      updateError(false)
     }
   }, [minValue, maxValue]);
 
