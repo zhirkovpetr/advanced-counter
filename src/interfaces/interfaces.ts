@@ -1,17 +1,14 @@
-import { rootReducer, setupStore } from '../redux/store';
+import {store} from "../redux/store";
 
-export type TRootState = ReturnType<typeof rootReducer>;
-export type TAppStore = ReturnType<typeof setupStore>;
-export type TAppDispatch = TAppStore['dispatch'];
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
 export type TCountSliceState = {
-  counter: {
     minValue: number;
     maxValue: number;
     count: number;
     error: boolean;
     editMode: boolean;
-  }
 };
 
 export type TSetMinValue = {
@@ -32,12 +29,4 @@ export type TSetEditMode = {
 
 export type TSetError = {
   error: boolean;
-}
-
-export type TSetCounter = {
-  minValue: number;
-  maxValue: number;
-  count: number;
-  error: boolean;
-  editMode: boolean;
 }
