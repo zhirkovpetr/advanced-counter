@@ -5,18 +5,12 @@ import {CountButtons} from "../count-buttons/CountButtons";
 
 import './Count.css';
 
-type CountPropsType = {
-  setCount: (count: number) => void
-  setEditModeSetCount: (editMode: boolean) => void
-}
-
-export const Count: React.FC<CountPropsType> = (props) => {
-  const {setCount, setEditModeSetCount} = props
+export const Count: React.FC = () => {
 
   return (
     <div className={'count-block'}>
-      <Screen />
-      <CountButtons setCount={setCount} setEditModeSetCount={setEditModeSetCount} />
+      <Screen/>
+      <CountButtons />
     </div>
   )
 }

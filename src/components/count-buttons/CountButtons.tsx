@@ -1,33 +1,31 @@
 import React from "react";
 
 import {Button} from "../button/Button";
-import {useAppSelector} from "../../hooks/ReduxHooks";
+import {useAppDispatch, useAppSelector} from "../../hooks/ReduxHooks";
+import {setCount, setEditMode} from "../../redux/count-slice";
 
 import './CountButtons.css';
 
-type CountButtonsPropsType = {
-  setCount: (count: number) => void
-  setEditModeSetCount: (editModeSetCount: boolean) => void
-}
+export const CountButtons: React.FC = () => {
+  const {count, maxValue, minValue, error} = useAppSelector(state => state.count)
+  const dispatch = useAppDispatch()
 
-export const CountButtons: React.FC<CountButtonsPropsType> = (props) => {
-  const {setCount, setEditModeSetCount} = props
-  const {count, maxValue, minValue, error, editMode} = useAppSelector(state => state.countSlice.counter)
+  const updateEditModeSetCount = (editMode: boolean) => {
+    dispatch(setEditMode({editMode}))
+  }
 
   const onClickIncrease = () => {
-    setCount(count + 1);
-    localStorage.setItem('counter', JSON.stringify({minValue, maxValue, count: count+1, error, editMode}))
+    dispatch(setCount({count: count + 1}))
   }
 
   const onClickReset = () => {
-    setCount(minValue)
-    localStorage.setItem('counter', JSON.stringify({minValue, maxValue, count: minValue, error, editMode}))
+    dispatch(setCount({count: minValue}))
   }
 
   const onSetCallback = () => {
-    setEditModeSetCount(true)
-    localStorage.setItem('counter', JSON.stringify({minValue, maxValue, count: minValue, error, editMode: true}))
+    updateEditModeSetCount(true)
   }
+
   return (
     <div className={'count-button'}>
       <Button title={'inc'} onClick={onClickIncrease} disabledButton={count >= maxValue || error}/>
